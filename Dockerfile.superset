@@ -1,0 +1,6 @@
+FROM apache/superset:latest
+
+USER root
+RUN site_packages="/app/.venv/lib/python$(python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')/site-packages" \
+    && pip install --no-cache-dir --target "$site_packages" psycopg2-binary
+USER superset
